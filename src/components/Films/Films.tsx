@@ -14,7 +14,6 @@ function Films() {
     (state: any) => state.pagination.currentPage * itemsCount
   );
   const firstPageItem = lastPageItem - itemsCount;
-  console.log(firstPageItem + '++++' + lastPageItem);
 
   return (
     <div className="films__block">

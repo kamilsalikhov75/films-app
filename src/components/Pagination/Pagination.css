@@ -10,11 +10,12 @@
 
 .pagination__button {
   width: 100%;
-  background: #296EF9;
+  background: #296ef9;
   border: none;
   padding: 10px;
   font-size: 16px;
   color: #fff;
+  cursor: pointer;
 }
 
 .pagination__button--left {
@@ -26,9 +27,10 @@
 }
 
 .pagination__button--disabled {
-  background: #5F9EFA;
+  background: #5f9efa;
+  cursor: default;
 }
 
-.pagination__button+.pagination__button {
+.pagination__button + .pagination__button {
   margin-left: 10px;
 }

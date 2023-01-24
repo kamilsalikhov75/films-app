@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { paginationButtonClass } from '../../const';
 import './Pagination.css';
 
 const firstPage = 1;
@@ -15,11 +17,20 @@ function Pagination() {
   );
   const pagesCount = Math.ceil(filmsCount / pageItemsCount);
 
+  const [prevButtonClass, setPrevButtonClass] = useState(
+    getPrevButtonClass(currentPage)
+  );
+  const [nextButtonClass, setNextButtonClass] = useState(
+    getNextButtonClass(currentPage, pagesCount)
+  );
+
   function nextPageClick() {
     if (currentPage < pagesCount) {
       dispatch({
         type: 'NEXT_PAGE',
       });
+      setNextButtonClass(getNextButtonClass(currentPage + 1, pagesCount));
+      setPrevButtonClass(getPrevButtonClass(currentPage + 1));
     }
   }
   function prevPageClick() {
@@ -27,22 +38,18 @@ function Pagination() {
       dispatch({
         type: 'PREV_PAGE',
       });
+      setNextButtonClass(getNextButtonClass(currentPage - 1, pagesCount));
+      setPrevButtonClass(getPrevButtonClass(currentPage - 1));
     }
   }
 
   return (
     <div className="pagination__block">
       <div className="pagination__buttons">
-        <button
-          onClick={prevPageClick}
-          className="pagination__button pagination__button--left pagination__button--disabled"
-        >
+        <button onClick={prevPageClick} className={prevButtonClass}>
           Назад
         </button>
-        <button
-          onClick={nextPageClick}
-          className="pagination__button pagination__button--right"
-        >
+        <button onClick={nextPageClick} className={nextButtonClass}>
           Вперед
         </button>
       </div>
@@ -51,6 +58,20 @@ function Pagination() {
       </p>
     </div>
   );
+}
+
+function getPrevButtonClass(currentPage: number) {
+  if (currentPage === firstPage) {
+    return paginationButtonClass.prev.disabled;
+  }
+  return paginationButtonClass.prev.default;
+}
+
+function getNextButtonClass(currentPage: number, pagesCount: number) {
+  if (currentPage === pagesCount) {
+    return paginationButtonClass.next.disabled;
+  }
+  return paginationButtonClass.prev.default;
 }
 
 export { Pagination };
