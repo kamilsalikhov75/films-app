@@ -1,13 +1,20 @@
 import './Film.css';
-import img from '../../assets/demon-slayer.jpg';
 
-function Film() {
+function Film({
+  img,
+  voteAverage,
+  title,
+}: {
+  img: string;
+  voteAverage: number;
+  title: string;
+}) {
   return (
     <div className="film__block">
       <img src={img} alt="обложка фильма" className="film__img" />
       <div className="film__info">
         <div className="film__info-top">
-          <p className="film__info-text">Рейтинг: 8.4</p>
+          <p className="film__info-text">Рейтинг: {voteAverage}</p>
           <button className="film__info-button">
             <svg
               width="24"
@@ -37,7 +44,7 @@ function Film() {
             </svg>
           </button>
         </div>
-        <h4 className="film__title">Demon Slayer KIMETSU NO YAIBA</h4>
+        <h4 className="film__title">{title}</h4>
         <button className="film__button">Подробнее</button>
       </div>
     </div>

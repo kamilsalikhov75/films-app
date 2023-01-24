@@ -1,10 +1,10 @@
 import './Checkbox.css';
 
-function Checkbox({ id, text }: { id: string; text: string }) {
+function Checkbox({ id, text }: { id: number; text: string }) {
   return (
     <div className="checkbox__block">
-      <input id={id} type="checkbox" className="checkbox" />
-      <label htmlFor={id}>{text}</label>
+      <input id={id.toString()} type="checkbox" className="checkbox" />
+      <label htmlFor={id.toString()}>{text}</label>
     </div>
   );
 }

@@ -2,8 +2,11 @@ import './Filter.css';
 
 import { Pagination } from '../Pagination/Pagination';
 import { Checkbox } from '../Checkbox/Checkbox';
+import { useSelector } from 'react-redux';
+import { GenreInterface } from '../../interfaces';
 
 function Filter() {
+  const genres: GenreInterface[] = useSelector((state: any) => state.genres);
   return (
     <div className="filter__block">
       <h3 className="filter__block-title">Фильтры:</h3>
@@ -28,12 +31,9 @@ function Filter() {
       </div>
 
       <div className="checkboxes__block">
-        <Checkbox id="1" text="боевик"/>
-        <Checkbox id="2" text="боевик"/>
-        <Checkbox id="3" text="боевик"/>
-        <Checkbox id="4" text="боевик"/>
-        <Checkbox id="5" text="боевик"/>
-        <Checkbox id="6" text="боевик"/>
+        {genres.map((genre) => (
+          <Checkbox key={genre.id} id={genre.id} text={genre.name} />
+        ))}
       </div>
       <Pagination />
     </div>
