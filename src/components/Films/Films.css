@@ -1,0 +1,14 @@
+.films__block {
+  max-width: 814px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1115px) {
+  .films__block {
+    width: 100%;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,27 @@
+.header {
+  background-color: #296ef9;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header__button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #fff;
+  background-color: #449a43;
+  border: none;
+  border-radius: 5px;
+  padding: 14px;
+}

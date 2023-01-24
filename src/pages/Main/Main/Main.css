@@ -1,0 +1,14 @@
+.content__container {
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 1115px) {
+  .content__container {
+    justify-content: center;
+  }
+}

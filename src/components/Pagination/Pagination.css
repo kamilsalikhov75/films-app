@@ -1,0 +1,34 @@
+.pagination__block {
+  text-align: center;
+}
+
+.pagination__buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.pagination__button {
+  width: 100%;
+  background: #296EF9;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.pagination__button--left {
+  border-radius: 4px 0px 0px 4px;
+}
+
+.pagination__button--right {
+  border-radius: 0px 4px 4px 0px;
+}
+
+.pagination__button--disabled {
+  background: #5F9EFA;
+}
+
+.pagination__button+.pagination__button {
+  margin-left: 10px;
+}
