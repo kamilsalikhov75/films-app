@@ -1,7 +1,7 @@
 import './Main.css';
 
-import { Films } from '../../../components/Films/Films';
-import { Filter } from '../../../components/Filter/Filter';
+import { Films } from '../../../components/films/Films';
+import { Filter } from '../../../components/filter/Filter';
 
 function Main() {
   return (
