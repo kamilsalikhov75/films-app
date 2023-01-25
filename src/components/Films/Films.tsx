@@ -6,14 +6,15 @@ import { imageUrl } from '../../const';
 import { FilmInterface } from '../../interfaces';
 
 function Films() {
-  const films: FilmInterface[] = useSelector(
-    (state: any) => state.films.filtredFilms
-  );
   const itemsCount = useSelector((state: any) => state.pagination.itemsCount);
   const lastPageItem = useSelector(
     (state: any) => state.pagination.currentPage * itemsCount
   );
   const firstPageItem = lastPageItem - itemsCount;
+  const films: FilmInterface[] = useSelector(
+    (state: any) => state.films.filtredFilms
+  );
+  const sort = useSelector((state: any) => state.films.sort);
 
   return (
     <div className="films__block">

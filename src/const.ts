@@ -12,3 +12,12 @@ export const paginationButtonClass = {
       'pagination__button pagination__button--right pagination__button--disabled',
   },
 };
+
+export const sort = {
+  popularityDesc: 'Популярные по убыванию',
+  popularityAsc: 'Популярные по возрастанию',
+  rateDesc: 'Рейтинг по убыванию',
+  rateAsc: 'Рейтинг по возрастанию',
+};
+
+export const years = ['2020', '2019', '2018', '2017'];

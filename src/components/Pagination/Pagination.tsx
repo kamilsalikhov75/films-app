@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { paginationButtonClass } from '../../const';
+import { NEXT_PAGE, PREV_PAGE } from '../../store/actions';
 import './Pagination.css';
-
 const firstPage = 1;
 
 function Pagination() {
@@ -27,7 +27,7 @@ function Pagination() {
   function nextPageClick() {
     if (currentPage < pagesCount) {
       dispatch({
-        type: 'NEXT_PAGE',
+        type: NEXT_PAGE,
       });
       setNextButtonClass(getNextButtonClass(currentPage + 1, pagesCount));
       setPrevButtonClass(getPrevButtonClass(currentPage + 1));
@@ -36,7 +36,7 @@ function Pagination() {
   function prevPageClick() {
     if (currentPage > firstPage) {
       dispatch({
-        type: 'PREV_PAGE',
+        type: PREV_PAGE,
       });
       setNextButtonClass(getNextButtonClass(currentPage - 1, pagesCount));
       setPrevButtonClass(getPrevButtonClass(currentPage - 1));
@@ -71,7 +71,7 @@ function getNextButtonClass(currentPage: number, pagesCount: number) {
   if (currentPage === pagesCount) {
     return paginationButtonClass.next.disabled;
   }
-  return paginationButtonClass.prev.default;
+  return paginationButtonClass.next.default;
 }
 
 export { Pagination };

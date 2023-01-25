@@ -1,4 +1,6 @@
-export const films = [
+import { FilmInterface } from '../interfaces';
+
+export const films: FilmInterface[] = [
   {
     adult: false,
     backdrop_path: '/qjGrUmKW78MCFG8PTLDBp67S27p.jpg',
