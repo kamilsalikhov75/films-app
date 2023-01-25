@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_GENRE, DELETE_GENRE } from '../../store/actions';
+import { ADD_GENRE, DELETE_GENRE, RESET_PAGE } from '../../store/actions';
 import './Checkbox.css';
 
 function Checkbox({ id, text }: { id: number; text: string }) {
@@ -8,8 +8,6 @@ function Checkbox({ id, text }: { id: number; text: string }) {
   const isChecked = currentGenres.includes(id);
 
   function addGenre() {
-    console.log(isChecked);
-
     if (currentGenres.includes(id)) {
       dispatch({
         type: DELETE_GENRE,
@@ -25,6 +23,9 @@ function Checkbox({ id, text }: { id: number; text: string }) {
         },
       });
     }
+    dispatch({
+      type: RESET_PAGE,
+    });
   }
   return (
     <div className="checkbox__block">
