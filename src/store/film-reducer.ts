@@ -29,7 +29,7 @@ export function filmReducer(
 
       return {
         ...state,
-        filtredFilms: sortArr(sort, state.sortedFilms),
+        filtredFilms: sortArr(sort, state.filtredFilms),
         sortedFilms: sortArr(sort, state.sortedFilms),
         sort,
       };
