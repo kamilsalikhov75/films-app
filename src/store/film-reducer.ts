@@ -1,11 +1,18 @@
 import { films } from '../mocks/films';
-import { CHANGE_SORT, CHANGE_YEAR, RESET_FILTERS } from './actions';
+import {
+  ADD_GENRE,
+  CHANGE_SORT,
+  CHANGE_YEAR,
+  DELETE_GENRE,
+  RESET_FILTERS,
+} from './actions';
 import { FilmInterface } from '../interfaces';
 import { AnyAction } from 'redux';
 const defaultSort = 'popularityDesc';
 const defaultYear = '2020';
 const initialState = {
-  intialFilms: films,
+  initialFilms: films,
+  sortedFilms: filterByYear(defaultYear, films),
   filtredFilms: filterByYear(defaultYear, films),
   sort: defaultSort,
   year: defaultYear,
@@ -22,7 +29,8 @@ export function filmReducer(
 
       return {
         ...state,
-        filtredFilms: sortArr(sort, state.filtredFilms),
+        filtredFilms: sortArr(sort, state.sortedFilms),
+        sortedFilms: sortArr(sort, state.sortedFilms),
         sort,
       };
     case CHANGE_YEAR:
@@ -30,17 +38,44 @@ export function filmReducer(
 
       return {
         ...state,
-        filtredFilms: filterByYear(year, state.intialFilms),
+        filtredFilms: sortArr(
+          state.sort,
+          filterByYear(year, state.initialFilms)
+        ),
+        sortedFilms: sortArr(
+          state.sort,
+          filterByYear(year, state.initialFilms)
+        ),
         year,
       };
     case RESET_FILTERS:
       return {
         ...state,
-        filtredFilms: filterByYear(defaultYear, state.intialFilms),
+        filtredFilms: filterByYear(defaultYear, state.initialFilms),
         sort: defaultSort,
         year: defaultYear,
         genres: [],
       };
+
+    case ADD_GENRE:
+      return {
+        ...state,
+        filtredFilms: filterByGenre(
+          [...state.genres, action.payload.id],
+          state.sortedFilms
+        ),
+        genres: [...state.genres, action.payload.id],
+      };
+    case DELETE_GENRE:
+      const genres = state.genres.filter(
+        (genreId) => genreId !== action.payload.id
+      );
+      return {
+        ...state,
+        filtredFilms: filterByGenre(genres, state.sortedFilms),
+        genres,
+      };
+
     default:
       return state;
   }
@@ -63,6 +98,15 @@ function sortArr(sortType: string, films: FilmInterface[]) {
 
 function filterByYear(year: string, films: FilmInterface[]) {
   return films.filter((film) => getYear(film.release_date) === year);
+}
+
+function filterByGenre(genres: number[], films: FilmInterface[]) {
+  if (genres.length) {
+    return films.filter((film) =>
+      film.genre_ids.some((genreId) => genres.includes(genreId))
+    );
+  }
+  return films;
 }
 
 function getYear(date: string) {
