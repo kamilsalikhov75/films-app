@@ -7,5 +7,5 @@ export const CHANGE_USER_FILTER = 'CHANGE_USER_FILTER';
 export const RESET_FILTERS = 'RESET_FILTERS';
 export const ADD_GENRE = 'ADD_GENRE';
 export const DELETE_GENRE = 'DELETE_GENRE';
-export const SET_USER = 'SET_USER';
+export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';

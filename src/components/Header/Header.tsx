@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { deleteUser } from '../../local-storage';
 import { LOG_OUT } from '../../store/actions';
 import './header.css';
 
@@ -12,6 +13,7 @@ function Header({ setIsActiveLoginPopup }: { setIsActiveLoginPopup: any }) {
       dispatch({
         type: LOG_OUT,
       });
+      deleteUser();
     } else {
       setIsActiveLoginPopup(true);
     }

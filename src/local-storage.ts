@@ -14,8 +14,12 @@ export function saveUser(user: UserInterface) {
 
 export function getUser() {
   try {
-    return localStorage.getItem(key.user);
+    return JSON.parse(localStorage.getItem(key.user) || '{}');
   } catch (error) {
     console.log(error);
   }
+}
+
+export function deleteUser() {
+  localStorage.removeItem(key.user);
 }

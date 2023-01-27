@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { errorMessage, placeholder } from '../../const';
+import { isValidUser } from '../../helpers';
+import { saveUser } from '../../local-storage';
 import { user } from '../../mocks/user';
-import { SET_USER } from '../../store/actions';
+import { LOG_IN } from '../../store/actions';
 import './login-popup.css';
 
 function LoginPopup({
@@ -22,14 +24,12 @@ function LoginPopup({
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (user.login === login && user.password === password) {
+    if (isValidUser({ login, password })) {
       dispatch({
-        type: SET_USER,
-        payload: {
-          user,
-        },
+        type: LOG_IN,
       });
       setIsActiveLoginPopup(false);
+      saveUser({ login, password });
     } else {
       setIsError(true);
     }

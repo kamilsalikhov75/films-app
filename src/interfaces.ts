@@ -23,6 +23,4 @@ export interface GenreInterface {
 export interface UserInterface {
   login: string;
   password: string;
-  favoriteFilms: number[];
-  soonFilms: number[];
 }

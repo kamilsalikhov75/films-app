@@ -13,9 +13,6 @@ function FilmPage() {
       (film: FilmInterface) => film.id.toString() === id
     )
   );
-  console.log(genres);
-
-  console.log(film);
 
   return (
     <div
