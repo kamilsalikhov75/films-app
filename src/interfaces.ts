@@ -24,3 +24,32 @@ export interface UserInterface {
   login: string;
   password: string;
 }
+
+export interface StateInterface {
+  films: {
+    filtredFilms: FilmInterface[];
+    genres: number[];
+    initialFilms: FilmInterface[];
+    sort: string;
+    sortedFilms: FilmInterface[];
+    userFilter: string;
+    year: string;
+    userList: {
+      favorite: number[];
+      soon: number[];
+    };
+  };
+  genres: GenreInterface[];
+  pagination: {
+    currentPage: number;
+    itemsCount: number;
+  };
+  user: {
+    isLogged: boolean;
+  };
+}
+
+export interface FilmListInterface {
+  favorite: number[];
+  soon: number[];
+}

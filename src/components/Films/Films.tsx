@@ -3,16 +3,18 @@ import './Films.css';
 import { Film } from '../film/film';
 import { useSelector } from 'react-redux';
 import { imageUrl } from '../../const';
-import { FilmInterface } from '../../interfaces';
+import { FilmInterface, StateInterface } from '../../interfaces';
 
 function Films({ setIsActiveLoginPopup }: { setIsActiveLoginPopup: any }) {
-  const itemsCount = useSelector((state: any) => state.pagination.itemsCount);
+  const itemsCount = useSelector(
+    (state: StateInterface) => state.pagination.itemsCount
+  );
   const lastPageItem = useSelector(
-    (state: any) => state.pagination.currentPage * itemsCount
+    (state: StateInterface) => state.pagination.currentPage * itemsCount
   );
   const firstPageItem = lastPageItem - itemsCount;
   const films: FilmInterface[] = useSelector(
-    (state: any) => state.films.filtredFilms
+    (state: StateInterface) => state.films.filtredFilms
   );
   const sort = useSelector((state: any) => state.films.sort);
 

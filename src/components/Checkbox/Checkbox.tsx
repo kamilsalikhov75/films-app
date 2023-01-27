@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { StateInterface } from '../../interfaces';
 import { ADD_GENRE, DELETE_GENRE, RESET_PAGE } from '../../store/actions';
 import './checkbox.css';
 
 function Checkbox({ id, text }: { id: number; text: string }) {
-  const currentGenres = useSelector((state: any) => state.films.genres);
+  const currentGenres = useSelector(
+    (state: StateInterface) => state.films.genres
+  );
   const dispatch = useDispatch();
   const isChecked = currentGenres.includes(id);
 

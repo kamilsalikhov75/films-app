@@ -3,7 +3,7 @@ import './filter.css';
 import { Pagination } from '../pagination/pagination';
 import { Checkbox } from '../checkbox/checkbox';
 import { useDispatch, useSelector } from 'react-redux';
-import { GenreInterface } from '../../interfaces';
+import { GenreInterface, StateInterface } from '../../interfaces';
 import { sort, userFilter, years } from '../../const';
 import {
   CHANGE_SORT,
@@ -18,11 +18,15 @@ const key = 0;
 const value = 1;
 
 function Filter() {
-  const genres: GenreInterface[] = useSelector((state: any) => state.genres);
-  const currentSort = useSelector((state: any) => state.films.sort);
-  const currentYear = useSelector((state: any) => state.films.year);
-  const currentUserFilter = useSelector((state: any) => state.films.userFilter);
-  const isLogged = useSelector((state: any) => state.user.isLogged);
+  const genres: GenreInterface[] = useSelector(
+    (state: StateInterface) => state.genres
+  );
+  const currentSort = useSelector((state: StateInterface) => state.films.sort);
+  const currentYear = useSelector((state: StateInterface) => state.films.year);
+  const currentUserFilter = useSelector(
+    (state: StateInterface) => state.films.userFilter
+  );
+  const isLogged = useSelector((state: StateInterface) => state.user.isLogged);
 
   const dispatch = useDispatch();
 
@@ -53,12 +57,16 @@ function Filter() {
 
   function userFilterChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const userFilter = e.currentTarget.value;
+    
 
     dispatch({
       type: CHANGE_USER_FILTER,
       payload: {
         userFilter,
       },
+    });
+    dispatch({
+      type: RESET_PAGE,
     });
   }
 

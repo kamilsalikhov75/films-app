@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { paginationButtonClass } from '../../const';
+import { StateInterface } from '../../interfaces';
 import { NEXT_PAGE, PREV_PAGE } from '../../store/actions';
 import './pagination.css';
 const firstPage = 1;
@@ -8,12 +9,14 @@ const firstPage = 1;
 function Pagination() {
   const dispatch = useDispatch();
 
-  const currentPage = useSelector((state: any) => state.pagination.currentPage);
+  const currentPage = useSelector(
+    (state: StateInterface) => state.pagination.currentPage
+  );
   const pageItemsCount = useSelector(
-    (state: any) => state.pagination.itemsCount
+    (state: StateInterface) => state.pagination.itemsCount
   );
   const filmsCount = useSelector(
-    (state: any) => state.films.filtredFilms.length
+    (state: StateInterface) => state.films.filtredFilms.length
   );
   const pagesCount = Math.ceil(filmsCount / pageItemsCount);
 

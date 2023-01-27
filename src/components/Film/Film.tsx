@@ -1,7 +1,21 @@
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { path } from '../../const';
+import { FilmListInterface, StateInterface } from '../../interfaces';
+import { getFilmList, saveFilmList } from '../../local-storage';
+import {
+  ADD_FAVORITE_FILM,
+  ADD_SOON_FILM,
+  DELETE_FAVORITE_FILM,
+  DELETE_SOON_FILM,
+} from '../../store/actions';
 import './film.css';
+
+const defaultFilmList: FilmListInterface = {
+  favorite: [],
+  soon: [],
+};
 
 function Film({
   id,
@@ -16,11 +30,48 @@ function Film({
   title: string;
   setIsActiveLoginPopup: any;
 }) {
-  const isLogged = useSelector((state: any) => state.user.isLogged);
+  const isLogged = useSelector((state: StateInterface) => state.user.isLogged);
+  const favoriteList = useSelector(
+    (state: StateInterface) => state.films.userList.favorite
+  );
+  const soonList = useSelector(
+    (state: StateInterface) => state.films.userList.soon
+  );
+  const [filmList, setFilmList] = useState(getFilmList() || defaultFilmList);
+
+  useEffect(() => {
+    saveFilmList(filmList);
+  }, [filmList]);
+
+  const dispatch = useDispatch();
 
   function favoriteClick() {
     if (isLogged) {
-      console.log(1);
+      let list;
+      if (favoriteList.includes(id)) {
+        dispatch({
+          type: DELETE_FAVORITE_FILM,
+          payload: {
+            id,
+          },
+        });
+        list = {
+          favorite: favoriteList.filter((filmId) => filmId !== id),
+          soon: soonList,
+        };
+      } else {
+        dispatch({
+          type: ADD_FAVORITE_FILM,
+          payload: {
+            id,
+          },
+        });
+        list = {
+          favorite: [...favoriteList, id],
+          soon: soonList,
+        };
+      }
+      setFilmList(list);
     } else {
       setIsActiveLoginPopup(true);
     }
@@ -28,11 +79,36 @@ function Film({
 
   function soonClick() {
     if (isLogged) {
-      console.log(1);
+      let list;
+      if (soonList.includes(id)) {
+        dispatch({
+          type: DELETE_SOON_FILM,
+          payload: {
+            id,
+          },
+        });
+        list = {
+          favorite: favoriteList,
+          soon: soonList.filter((filmId) => filmId !== id),
+        };
+      } else {
+        dispatch({
+          type: ADD_SOON_FILM,
+          payload: {
+            id,
+          },
+        });
+        list = {
+          favorite: favoriteList,
+          soon: [...soonList, id],
+        };
+      }
+      setFilmList(list);
     } else {
       setIsActiveLoginPopup(true);
     }
   }
+
   return (
     <div className="film__block">
       <img src={img} alt="обложка фильма" className="film__img" />
