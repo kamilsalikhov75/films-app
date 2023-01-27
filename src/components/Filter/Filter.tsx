@@ -1,12 +1,13 @@
-import './Filter.css';
+import './filter.css';
 
-import { Pagination } from '../pagination/Pagination';
-import { Checkbox } from '../checkbox/Checkbox';
+import { Pagination } from '../pagination/pagination';
+import { Checkbox } from '../checkbox/checkbox';
 import { useDispatch, useSelector } from 'react-redux';
 import { GenreInterface } from '../../interfaces';
-import { sort, years } from '../../const';
+import { sort, userFilter, years } from '../../const';
 import {
   CHANGE_SORT,
+  CHANGE_USER_FILTER,
   CHANGE_YEAR,
   RESET_FILTERS,
   RESET_PAGE,
@@ -20,6 +21,8 @@ function Filter() {
   const genres: GenreInterface[] = useSelector((state: any) => state.genres);
   const currentSort = useSelector((state: any) => state.films.sort);
   const currentYear = useSelector((state: any) => state.films.year);
+  const currentUserFilter = useSelector((state: any) => state.films.userFilter);
+  const isLogged = useSelector((state: any) => state.user.isLogged);
 
   const dispatch = useDispatch();
 
@@ -45,6 +48,17 @@ function Filter() {
     });
     dispatch({
       type: RESET_PAGE,
+    });
+  }
+
+  function userFilterChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const userFilter = e.currentTarget.value;
+
+    dispatch({
+      type: CHANGE_USER_FILTER,
+      payload: {
+        userFilter,
+      },
     });
   }
 
@@ -90,6 +104,22 @@ function Filter() {
           ))}
         </select>
       </div>
+
+      {isLogged ? (
+        <div className="select__block">
+          <select
+            className="filter__select"
+            onChange={userFilterChange}
+            value={currentUserFilter}
+          >
+            {Object.entries(userFilter).map((item) => (
+              <option key={item[key]} value={item[key]}>
+                {item[value]}
+              </option>
+            ))}
+          </select>
+        </div>
+      ) : null}
 
       <div className="checkboxes__block">
         {genres.map((genre) => (

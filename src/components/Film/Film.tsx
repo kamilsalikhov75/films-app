@@ -1,21 +1,45 @@
-import './Film.css';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { path } from '../../const';
+import './film.css';
 
 function Film({
+  id,
   img,
   voteAverage,
   title,
+  setIsActiveLoginPopup,
 }: {
+  id: number;
   img: string;
   voteAverage: number;
   title: string;
+  setIsActiveLoginPopup: any;
 }) {
+  const isLogged = useSelector((state: any) => state.user.isLogged);
+
+  function favoriteClick() {
+    if (isLogged) {
+      console.log(1);
+    } else {
+      setIsActiveLoginPopup(true);
+    }
+  }
+
+  function soonClick() {
+    if (isLogged) {
+      console.log(1);
+    } else {
+      setIsActiveLoginPopup(true);
+    }
+  }
   return (
     <div className="film__block">
       <img src={img} alt="обложка фильма" className="film__img" />
       <div className="film__info">
         <div className="film__info-top">
           <p className="film__info-text">Рейтинг: {voteAverage}</p>
-          <button className="film__info-button">
+          <button className="film__info-button" onClick={favoriteClick}>
             <svg
               width="24"
               height="23"
@@ -29,7 +53,7 @@ function Film({
               />
             </svg>
           </button>
-          <button className="film__info-button">
+          <button className="film__info-button" onClick={soonClick}>
             <svg
               width="19"
               height="25"
@@ -45,7 +69,9 @@ function Film({
           </button>
         </div>
         <h4 className="film__title">{title}</h4>
-        <button className="film__button">Подробнее</button>
+        <Link to={`${path.film}${id}`} className="film__button">
+          Подробнее
+        </Link>
       </div>
     </div>
   );

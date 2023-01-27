@@ -2,20 +2,25 @@ import { films } from '../mocks/films';
 import {
   ADD_GENRE,
   CHANGE_SORT,
+  CHANGE_USER_FILTER,
   CHANGE_YEAR,
   DELETE_GENRE,
   RESET_FILTERS,
 } from './actions';
 import { FilmInterface } from '../interfaces';
 import { AnyAction } from 'redux';
+
 const defaultSort = 'popularityDesc';
 const defaultYear = '2020';
+const defaultUserFilter = 'all';
+
 const initialState = {
   initialFilms: films,
   sortedFilms: filterByYear(defaultYear, films),
   filtredFilms: filterByYear(defaultYear, films),
   sort: defaultSort,
   year: defaultYear,
+  userFilter: defaultUserFilter,
   genres: [],
 };
 
@@ -32,6 +37,13 @@ export function filmReducer(
         filtredFilms: sortArr(sort, state.filtredFilms),
         sortedFilms: sortArr(sort, state.sortedFilms),
         sort,
+      };
+    case CHANGE_USER_FILTER:
+      const userFilter = action.payload.userFilter;
+
+      return {
+        ...state,
+        userFilter,
       };
     case CHANGE_YEAR:
       const year = action.payload.year;

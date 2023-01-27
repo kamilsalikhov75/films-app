@@ -21,3 +21,23 @@ export const sort = {
 };
 
 export const years = ['2020', '2019', '2018', '2017'];
+
+export const userFilter = {
+  all: 'Все',
+  favorite: 'Избранные',
+  soon: 'Посмотреть позже',
+};
+
+export const placeholder = {
+  login: 'Логин',
+  password: 'Пароль',
+};
+
+export const errorMessage = {
+  login: 'Неверные логин или пароль!',
+};
+
+export const path = {
+  main: "/",
+  film: "/film/"
+}

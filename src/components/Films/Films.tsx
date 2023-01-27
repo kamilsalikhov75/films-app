@@ -1,11 +1,11 @@
 import './Films.css';
 
-import { Film } from '../film/Film';
+import { Film } from '../film/film';
 import { useSelector } from 'react-redux';
 import { imageUrl } from '../../const';
 import { FilmInterface } from '../../interfaces';
 
-function Films() {
+function Films({ setIsActiveLoginPopup }: { setIsActiveLoginPopup: any }) {
   const itemsCount = useSelector((state: any) => state.pagination.itemsCount);
   const lastPageItem = useSelector(
     (state: any) => state.pagination.currentPage * itemsCount
@@ -21,9 +21,11 @@ function Films() {
       {films.slice(firstPageItem, lastPageItem).map((film) => (
         <Film
           key={film.id}
+          id={film.id}
           img={`${imageUrl}${film.poster_path || film.backdrop_path}`}
           voteAverage={film.vote_average}
           title={film.title}
+          setIsActiveLoginPopup={setIsActiveLoginPopup}
         />
       ))}
     </div>

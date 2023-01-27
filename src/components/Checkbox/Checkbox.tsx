@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_GENRE, DELETE_GENRE, RESET_PAGE } from '../../store/actions';
-import './Checkbox.css';
+import './checkbox.css';
 
 function Checkbox({ id, text }: { id: number; text: string }) {
   const currentGenres = useSelector((state: any) => state.films.genres);
