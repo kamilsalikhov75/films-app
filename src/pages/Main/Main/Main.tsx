@@ -1,14 +1,14 @@
-import './Main.css';
+import './main.css';
 
-import { Films } from '../../../components/films/Films';
-import { Filter } from '../../../components/filter/Filter';
+import { Filter } from '../../../components/filter/filter';
+import { Films } from '../../../components/films/films';
 
-function Main() {
+function Main({ setIsActiveLoginPopup }: { setIsActiveLoginPopup: any }) {
   return (
     <section className="content">
       <div className="container content__container">
         <Filter />
-        <Films />
+        <Films setIsActiveLoginPopup={setIsActiveLoginPopup} />
       </div>
     </section>
   );

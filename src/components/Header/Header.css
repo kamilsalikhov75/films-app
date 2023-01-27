@@ -1,7 +1,6 @@
 .header {
   background-color: #296ef9;
   padding: 10px;
-  margin-bottom: 30px;
 }
 
 .header__container {
@@ -24,4 +23,5 @@
   border: none;
   border-radius: 5px;
   padding: 14px;
+  cursor: pointer;
 }

@@ -31,6 +31,7 @@
   height: 20px;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .film__info-button svg {
@@ -45,7 +46,7 @@
 
 .film__button {
   position: absolute;
-  width: 100%;
+  width: -webkit-fill-available;
   padding: 10px;
   border: none;
   border-top: 1px solid #d9d9d9;
@@ -55,6 +56,8 @@
   left: 0;
   bottom: 0;
   cursor: pointer;
+  text-decoration: none;
+  color: #000;
 }
 
 @media (max-width: 1115px) {

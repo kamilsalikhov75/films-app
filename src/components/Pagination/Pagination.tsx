@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { paginationButtonClass } from '../../const';
 import { NEXT_PAGE, PREV_PAGE } from '../../store/actions';
-import './Pagination.css';
+import './pagination.css';
 const firstPage = 1;
 
 function Pagination() {

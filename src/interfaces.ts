@@ -19,3 +19,10 @@ export interface GenreInterface {
   id: number;
   name: string;
 }
+
+export interface UserInterface {
+  login: string;
+  password: string;
+  favoriteFilms: number[];
+  soonFilms: number[];
+}
